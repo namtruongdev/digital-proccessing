@@ -6,18 +6,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Image Proccessing</title>
+  <script src="opencv.js" async></script>
 </head>
 
 <body>
   <canvas id="Canvas"></canvas>
   <div class="control">
     <input type="file" name="" id="input" multiple="false" accept="image/*">
+    <button type="button" id="edgeDetection">Edge Detection</button>
     <button type="button" id="makeBinary">Make Binary</button>
     <button type="button" id="makeGray">Make Gray</button>
     <button type="button" id="medianFilter">Median Filter</button>
     <button type="button" id="redFilter">Red Filter</button>
     <button type="button" id="zoomIn">Zoom In</button>
     <button type="button" id="zoomOut">Zoom Out</button>
+    <button type="button" id="segmentation">Segmentation</button>
     <a href="" id="save">Save image</a>
     <button type="button" id="reset">Reset</button>
   </div>

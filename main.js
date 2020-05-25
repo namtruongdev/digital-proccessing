@@ -10,11 +10,25 @@ const zoomOutBtn = document.querySelector('#zoomOut');
 const saveBtn = document.querySelector('#save');
 const resetBtn = document.querySelector('#reset');
 const binaryBtn = document.querySelector('#makeBinary');
+const segmentationBtn = document.querySelector('#segmentation');
+const edgeDetectionBtn = document.querySelector('#edgeDetection');
 
 function upload() {
   image = new SimpleImage(fileInput);
   resetImage = new SimpleImage(fileInput);
   image.drawTo(canvas);
+}
+
+function edgeDetection() {
+  let src = cv.imread('Canvas');
+  let dst = new cv.Mat();
+  let absDst = new cv.Mat();
+  cv.cvtColor(src, src, cv.COLOR_RGB2GRAY, 0);
+  cv.Sobel(src, absDst, cv.CV_64F, 1, 0, 3, 1, 0, cv.BORDER_DEFAULT);
+  cv.convertScaleAbs(absDst, absDst, 1, 0);
+  cv.imshow('Canvas', absDst);
+  src.delete();
+  absDst.delete();
 }
 
 function makeBinary() {
@@ -84,15 +98,29 @@ function red() {
 function zoomIn() {
   let width = image.getWidth();
   let height = image.getHeight();
-  image.setSize(width + 200, height + 200);
+  image.setSize(width * 2, height * 2);
   image.drawTo(canvas);
 }
 
 function zoomOut() {
   let width = image.getWidth();
   let height = image.getHeight();
-  image.setSize(width - 200, height - 200);
+  image.setSize(width / 2, height / 2);
   image.drawTo(canvas);
+}
+
+function segmentation() {
+  let src = cv.imread('Canvas');
+  let dst = new cv.Mat();
+  let gray = new cv.Mat();
+
+  cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
+  cv.threshold(gray, gray, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU);
+
+  cv.imshow('Canvas', gray);
+  src.delete();
+  dst.delete();
+  gray.delete();
 }
 
 function save() {
@@ -101,15 +129,19 @@ function save() {
 }
 
 function reset() {
-  resetImage.drawTo(canvas);
+  image = resetImage;
+  image.drawTo(canvas);
+  resetImage = new SimpleImage(canvas);
 }
 
 fileInput.addEventListener('change', upload);
+edgeDetectionBtn.addEventListener('click', edgeDetection);
 binaryBtn.addEventListener('click', makeBinary);
 grayBtn.addEventListener('click', MakeGray);
 medianFilter.addEventListener('click', median);
 redFilter.addEventListener('click', red);
 zoomInBtn.addEventListener('click', zoomIn);
 zoomOutBtn.addEventListener('click', zoomOut);
+segmentationBtn.addEventListener('click', segmentation);
 saveBtn.addEventListener('click', save, false);
 resetBtn.addEventListener('click', reset);
