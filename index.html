@@ -10,12 +10,18 @@
 </head>
 
 <body>
-  <canvas id="Canvas"></canvas>
+  <main>
+    <canvas id="Canvas"></canvas>
+
+    <canvas id="Canvas2"></canvas>
+  </main>
   <div class="control">
     <input type="file" name="" id="input" multiple="false" accept="image/*">
     <button type="button" id="edgeDetection">Edge Detection</button>
     <button type="button" id="makeBinary">Make Binary</button>
     <button type="button" id="makeGray">Make Gray</button>
+    <button type="button" id="histogram">Histogram</button>
+    <button type="button" id="histogramE">Histogram Equalization</button>
     <button type="button" id="medianFilter">Median Filter</button>
     <button type="button" id="redFilter">Red Filter</button>
     <button type="button" id="zoomIn">Zoom In</button>
@@ -24,6 +30,7 @@
     <a href="" id="save">Save image</a>
     <button type="button" id="reset">Reset</button>
   </div>
+
   <script src="/simpleImage.js"></script>
   <script src="main.js"></script>
 </body>
