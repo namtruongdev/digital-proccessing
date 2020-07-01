@@ -17,6 +17,9 @@ const edgeDetectionBtn = document.querySelector('#edgeDetection');
 const historgramBtn = document.querySelector('#histogram');
 const historgramEBtn = document.querySelector('#histogramE');
 
+const menu = document.querySelector('.control');
+const menuBtn = document.querySelector('#hideBtn');
+
 function upload() {
   image = new SimpleImage(fileInput);
   resetImage = new SimpleImage(fileInput);
@@ -198,3 +201,7 @@ zoomOutBtn.addEventListener('click', zoomOut);
 segmentationBtn.addEventListener('click', segmentation);
 saveBtn.addEventListener('click', save, false);
 resetBtn.addEventListener('click', reset);
+
+menuBtn.addEventListener('click', () => {
+  menu.classList.toggle('translateX');
+});

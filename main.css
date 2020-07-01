@@ -9,6 +9,7 @@
 
 body {
   position: relative;
+  overflow-x: hidden;
 }
 canvas {
   /* width: 100%;
@@ -44,6 +45,19 @@ main {
   width: 140px;
   text-align: center;
   opacity: 0.5;
+}
+.translateX {
+  transform: translateX(1000px);
+  transition: 0.3s all;
+}
+#hideBtn {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.02);
+  position: fixed;
+  cursor: pointer;
+  bottom: 0;
+  right: 0;
 }
 #save {
   text-decoration: none;
